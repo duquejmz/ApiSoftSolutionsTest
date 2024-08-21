@@ -8,7 +8,7 @@ class Server {
     constructor() {
         this.app = express();
         this.port = process.env.PORT || 3000;
-        this.host = process.env.HOST || '127.0.0.1';
+        // this.host = process.env.HOST || '127.0.0.1';
         this.pathProduct = '/api-product';
         this.pathCategory = '/api-category';
 
@@ -37,8 +37,8 @@ class Server {
     }
 
     listen() {
-        this.app.listen(this.port, this.host, () => {
-            console.log(`Server is running at http://${this.host}:${this.port}`);
+        this.app.listen(this.port, () => {
+            console.log(`Server is running at http://localhost:${this.port}`);
         });
     }
 }
