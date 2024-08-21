@@ -6,15 +6,29 @@ const getCategory = async (req, res) => {
 };
 
 const postCategory = async (req, res) => {
-  let msg = "Product inserted";
-  const body = req.body;
   try {
-    const category = new Category(body);
-    await category.save();
+      const { name } = req.body;
+
+      // Imprime los datos que recibes para verificar que req.body tenga la información correcta
+      console.log("Datos recibidos:", { name });
+
+      // Crea un nuevo documento
+      const newCategory = new Category({
+          name
+      });
+
+      // Guarda el documento en la base de datos
+      await newCategory.save();
+
+      // Devuelve una respuesta exitosa
+      res.status(201).json(newCategory);
   } catch (error) {
-    msg = error;
+      // Imprime el error para ayudar a depurar
+      console.error("Error al guardar el documento:", error);
+
+      // Devuelve una respuesta de error
+      res.status(500).json({ msg: "Error al guardar el documento", error });
   }
-  res.json({ msg: msg });
 };
 
 module.exports = {

@@ -6,15 +6,31 @@ const getProduct = async (req, res) => {
 };
 
 const postProduct = async (req, res) => {
-  let msg = "Product inserted";
-  const body = req.body;
   try {
-    const product = new Product(body);
-    await product.save();
+      const { name, price, stock } = req.body;
+
+      // Imprime los datos que recibes para verificar que req.body tenga la información correcta
+      console.log("Datos recibidos:", { name, price, stock });
+
+      // Crea un nuevo documento
+      const newProduct = new Product({
+          name,
+          price,
+          stock
+      });
+
+      // Guarda el documento en la base de datos
+      await newProduct.save();
+
+      // Devuelve una respuesta exitosa
+      res.status(201).json(newProduct);
   } catch (error) {
-    msg = error;
+      // Imprime el error para ayudar a depurar
+      console.error("Error al guardar el documento:", error);
+
+      // Devuelve una respuesta de error
+      res.status(500).json({ msg: "Error al guardar el documento", error });
   }
-  res.json({ msg: msg });
 };
 
 const putProduct = async(req, res) => {
