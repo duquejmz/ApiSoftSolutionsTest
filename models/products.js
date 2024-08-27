@@ -1,4 +1,4 @@
-const {model, Schema} = require('mongoose')
+import { model, Schema } from 'mongoose'
 
 const productSchema = new Schema({
     name: {
@@ -24,4 +24,4 @@ productSchema.set('toJSON', {
 })
 
 
-module.exports = model('Products', productSchema, 'Products') // crea la coleccion sino existe y exporta los datos
+export default model('Product', productSchema, 'Products') // crea la coleccion sino existe y exporta los datos

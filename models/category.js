@@ -1,4 +1,4 @@
-const {model, Schema} = require('mongoose')
+import { model, Schema } from 'mongoose'
 
 const categorySchema = new Schema({
     name: {
@@ -8,7 +8,10 @@ const categorySchema = new Schema({
         maxlength: [100, 'Max 100 characters'], // tamaño max
         minlength: [2, 'Min 2 characters']
     }
+},
+{
+    versionKey: false
 }
 )
 
-module.exports = model('Category', categorySchema, 'Categories')
+export default model('Catgeory', categorySchema, 'Categories')

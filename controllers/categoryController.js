@@ -1,11 +1,11 @@
-const Category = require("../models/category");
+import Category from "../models/category.js";
 
-const getCategory = async (req, res) => {
+export async function getCategory (req, res) {
   const categories = await Category.find();
   res.json(categories);
 };
 
-const postCategory = async (req, res) => {
+export async function postCategory (req, res) {
   try {
       const { name } = req.body;
 
@@ -29,9 +29,4 @@ const postCategory = async (req, res) => {
       // Devuelve una respuesta de error
       res.status(500).json({ msg: "Error al guardar el documento", error });
   }
-};
-
-module.exports = {
-  getCategory,
-  postCategory,
 };

@@ -1,11 +1,11 @@
-const Product = require("../models/products");
+import Product from "../models/products.js";
 
-const getProduct = async (req, res) => {
+export async function getProduct (req, res) {
   const products = await Product.find();
   res.json(products);
 };
 
-const postProduct = async (req, res) => {
+export async function postProduct (req, res) {
   try {
       const { name, price, stock } = req.body;
 
@@ -33,7 +33,7 @@ const postProduct = async (req, res) => {
   }
 };
 
-const putProduct = async(req, res) => {
+export async function putProduct (req, res) {
     const {name, price, stock} = req.body
     let msg = 'Product Update'
     try {
@@ -44,7 +44,7 @@ const putProduct = async(req, res) => {
     res.json ({ msg : msg })
 }
 
-const deleteProduct = async(req, res) => {
+export async function deleteProduct (req, res) {
     let msg = 'Product deleted'
     id = req.params.id
     try {
@@ -55,9 +55,3 @@ const deleteProduct = async(req, res) => {
     res.json ({ msg : msg})
 }
 
-module.exports = {
-  getProduct,
-  postProduct,
-  putProduct,
-  deleteProduct
-};

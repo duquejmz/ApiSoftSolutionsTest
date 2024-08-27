@@ -1,7 +1,10 @@
-const express = require('express')
-const dbConnect = require('../database/config')
-const {getProduct, postProduct, putProduct, deleteProduct} = require('../controllers/productController')
-const {getCategory, postCategory} = require('../controllers/categoryController')
+import express, { json } from 'express'
+import dbConnect from '../database/config.js'
+import '../database/config.js'
+import productRouter from '../routes/productRoute.js';
+import userRouter from '../routes/userRoute.js';
+import authRouter from '../routes/authRoute.js';
+import categoryRouter from '../routes/categoryRoute.js';
 
 
 class Server {
@@ -11,6 +14,8 @@ class Server {
         // this.host = process.env.HOST || '127.0.0.1';
         this.pathProduct = '/api-product';
         this.pathCategory = '/api-category';
+        this.pathUser = '/api-user';
+        this.pathAuth = '/api-auth'
 
         // Initialize methods in the correct order
         this.middlewares(); 
@@ -24,16 +29,20 @@ class Server {
 
     middlewares() {
         // Add middleware to parse JSON
-        this.app.use(express.json());
+        this.app.use(json());
     } 
 
     routes() {
-        this.app.get(this.pathProduct, getProduct);
-        this.app.post(this.pathProduct, postProduct);
-        this.app.put(this.pathProduct, putProduct);
-        this.app.delete(this.pathProduct+'/:id', deleteProduct);
-        this.app.get(this.pathCategory, getCategory);
-        this.app.post(this.pathCategory, postCategory)
+        // this.app.get(this.pathProduct, getProduct);
+        // this.app.post(this.pathProduct, postProduct);
+        // this.app.put(this.pathProduct, putProduct);
+        // this.app.delete(this.pathProduct+'/:id', deleteProduct);
+        // this.app.get(this.pathCategory, getCategory);
+        // this.app.post(this.pathCategory, postCategory);
+        this.app.use(this.pathProduct, productRouter)
+        this.app.use(this.pathCategory, categoryRouter)
+        this.app.use(this.pathUser, userRouter)
+        this.app.use(this.pathAuth, authRouter)
     }
 
     listen() {
@@ -43,6 +52,6 @@ class Server {
     }
 }
 
-module.exports = Server;
+export default Server
 
 // Tarea: crear nuevamente la cadena de conexion. Crear un proyecto que se permita conectar al servidor de node y a mongo. 
