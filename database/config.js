@@ -17,7 +17,8 @@ function dbConnect() {
         console.log(error);
     }
 } */
-import { connect } from 'mongoose'
+
+/* import { connect } from 'mongoose'
 
 const dbConnect = async() => {
     try {
@@ -27,4 +28,19 @@ const dbConnect = async() => {
         console.log(error);
     }
 }
-export default dbConnect  //Export the function
+export default dbConnect */  //Export the function
+
+import mongoose, { connect } from 'mongoose'
+
+const dbUri = process.env.MONGO_CNN || 'mongodb+srv://jimenezcamila137:hef31bys90J*@cluster0.ezdkolb.mongodb.net/SoftSolutionsTest?retryWrites=true&w=majority&appName=Cluster0'
+
+export async function dbConnect() {
+    mongoose.connect(dbUri)
+    try {
+        await connect(process.env.MONGO_CNN)
+        console.log('Connect to server database');
+    } catch (error) {
+        console.log(error);
+    }
+}
+export default dbConnect
