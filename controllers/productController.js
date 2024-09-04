@@ -37,7 +37,7 @@ export async function putProduct (req, res) {
     const {name, price, stock} = req.body
     let msg = 'Product Update'
     try {
-        await Product.findOneAndUpdate({name : name}, {price : price, stock : stock})
+        await Product.findOneBy({name : name}, {price : price, stock : stock})
     } catch (error) {
         msg = error
     }

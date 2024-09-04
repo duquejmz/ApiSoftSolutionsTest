@@ -30,12 +30,9 @@ const dbConnect = async() => {
 }
 export default dbConnect */  //Export the function
 
-import mongoose, { connect } from 'mongoose'
-
-const dbUri = process.env.MONGO_CNN || 'mongodb+srv://jimenezcamila137:hef31bys90J*@cluster0.ezdkolb.mongodb.net/SoftSolutionsTest?retryWrites=true&w=majority&appName=Cluster0'
+import { connect } from 'mongoose'
 
 export async function dbConnect() {
-    mongoose.connect(dbUri)
     try {
         await connect(process.env.MONGO_CNN)
         console.log('Connect to server database');

@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs'
 import User from "../models/user.js"
+import generateJWT from '../helpers/generateJWT.js'
 
 export async function postUser(req, res){
     const body = req.body
@@ -23,7 +24,9 @@ export async function Login (req, res) {
         else {
             const userLogged = await bcrypt.compare(password, user.password)
             if(userLogged){
-                res.status(200).json({ msg: 'Logged' })
+                const token = await generateJWT(user)
+                res.cookie('token', token)
+                res.status(200).json({ msg : token })
             }
             else {
                 res.status(404).json({ msg: 'Email or password dont found'})
