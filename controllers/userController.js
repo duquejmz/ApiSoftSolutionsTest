@@ -2,6 +2,11 @@ import bcrypt from 'bcryptjs'
 import User from "../models/user.js"
 import generateJWT from '../helpers/generateJWT.js'
 
+export async function getUser (req, res) {
+    const users = await User.find();
+    res.json(users);
+  };
+
 export async function postUser(req, res){
     const body = req.body
     try {

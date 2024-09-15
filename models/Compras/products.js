@@ -1,4 +1,5 @@
 import { model, Schema } from 'mongoose'
+import Category from '../Servicios/category.js'
 
 const productSchema = new Schema({
     name: {
@@ -8,16 +9,24 @@ const productSchema = new Schema({
         maxlength: [50, 'Max 50 characters'], // tamaño max
         minlength: [2, 'Min 2 characters']
     },
+    description: {
+        type: String, // tipo dato
+        required: [true, 'The description is required'] // requerido
+    },
     price: {
-        type: Number, // tipo dato
-        required: [true, 'The category is required'], // requerido
-        minlength: [3, 'Min 3 characters']
+        type: Number,
+        required: [true, 'The price is required']
     },
     stock: {
         type: Number,
-        required: [true, 'The stock is required']
+        required: [true, 'the stock is required']
+    },
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: 'Category',
+        // required: [true, 'the category is required']
     }
-})
+});
 
 productSchema.set('toJSON', {
     versionKey : false
