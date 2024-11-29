@@ -1,9 +1,11 @@
 import { Router } from 'express'
-import { getCategory, postCategory } from '../controllers/categoryController.js'
+import { deleteCategory, getCategory, postCategory, putCategory } from '../controllers/categoryController.js'
 
 const categoryRouter = Router()
 
 categoryRouter.get('/', getCategory)
 categoryRouter.post('/', postCategory)
+categoryRouter.put('/:id', putCategory)
+categoryRouter.delete('/:id', deleteCategory)
 
 export default categoryRouter
